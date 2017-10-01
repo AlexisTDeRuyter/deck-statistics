@@ -7,6 +7,7 @@
     <script src='../node_modules/angular-animate/angular-animate.js'></script>
     <script src='../node_modules/angular-aria/angular-aria.min.js'></script>
     <script src='../node_modules/angular-material/angular-material.min.js'></script>
+    <script src='../node_modules/angular-google-chart/ng-google-chart.js'></script>
     <script type='text/javascript' src='app.js'></script>
   </head>
   <body layout='column'>
@@ -44,18 +45,9 @@
           </md-list>
         </div>
 
-
-
-
-
-
-
-
-
-
         <div flex='40' id='deck-statistics'>
-          <h1>I am deck statistics</h1>
-
+          <div  ng-controller='ManaCurveChartCtrl as chart' google-chart chart="myChartObject"></div>
+          <div ng-controller='ColorsChartCtrl as chart' google-chart chart='myChartObject'></div>
         </div>
       </div>
 

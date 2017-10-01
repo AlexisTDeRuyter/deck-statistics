@@ -11,47 +11,59 @@
     <script type='text/javascript' src='app.js'></script>
   </head>
   <body layout='column'>
-    <md-toolbar layout='row' layout-align='center center'>
-      <h1>Deck Statistics</h1>
+
+    <!-- App Header -->
+    <md-toolbar layout='row' layout-align='center center' layout-margin>
+      <h1 class='md-display-1'>Deck Statistics</h1>
     </md-toolbar>
+
+    <!-- Main Content Container -->
     <md-content layout='column' ng-controller='DeckController as deck'>
-      <div id='deck-name' layout='row' layout-align='start center'>
-        <h1>{{deck.name}}</h1>
-      </div>
-      <div layout='row'>
-        <div flex='60' id='deck-details'>
-          <md-list flex>
-            <md-subheader>
-              Creatures
-            </md-subheader>
-            <md-list-item ng-repeat="card in deck.cards | filter : {'type' : 'Creature'}">
-              <img ng-src='{{card.artCrop}}' class='md-avatar'/>
-              <div layout='row' layout-align='space-between center' flex>
-                <h3>{{card.name}}</h3>
-                <h4>{{card.main}}</h4>
-              </div>
-            </md-list-item>
-            <md-divider></md-divider>
-            <md-subheader>
-              Instants
-            </md-subheader>
-            <md-list-item ng-repeat='card in deck.cards | filter : {"type" : "Instant"}'>
-              <img ng-src='{{card.artCrop}}' class='md-avatar' />
-              <div layout='row' layout-align='space-between center' flex>
-                <h3>{{card.name}}</h3>
-                <h4>{{card.main}}</h4>
-              </div>
-            </md-list-item>
-          </md-list>
-        </div>
 
-        <div flex='40' id='deck-statistics'>
-          <div  ng-controller='ManaCurveChartCtrl as chart' google-chart chart="myChartObject"></div>
-          <div ng-controller='ColorsChartCtrl as chart' google-chart chart='myChartObject'></div>
-        </div>
+      <!-- Deck Header -->
+      <div layout='row' layout-align='start center' layout-margin>
+        <h1 class='md-display-1' flex>{{deck.name}}</h1>
       </div>
 
+      <!-- Deck List Details -->
+      <div layout='col' layout-gt-md='row' layout-wrap>
+        <div flex='100' flex-gt-md='60' flex-order='1' flex-order-gt-md='-1'>
+          <div layout='row' layout-wrap>
+
+            <!-- Each Column -->
+            <md-list ng-repeat='column in deck.columns' flex='50'>
+
+              <!-- Each Category in Column -->
+              <div ng-repeat='category in column'>
+                <md-subheader>
+                  <h3 class='md-title'>{{category[0].type}}</h3>
+                </md-subheader>
+
+                <!-- Each Card in Category-->
+                <md-list-item ng-repeat='card in category'>
+                  <img ng-src='{{card.artCrop}}' class='md-avatar'/>
+                  <div layout='row' layout-align='space-between center' flex>
+                    <p class='md-body-2'>{{card.name}}</p>
+                    <p class='md-body-2'>{{card.main}}</p>
+                  </div>
+                </md-list-item>
+
+              </div>
+            </md-list>
+          </div>
+        </div>
+
+        <!-- Deck Statistics -->
+        <div flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='1' layout='row' layout-gt-md='col' layout-wrap>
+
+          <!-- Mana Curve Chart -->
+          <div ng-controller='ManaCurveChartCtrl as chart' google-chart chart="myChartObject" flex='50' flex-gt-md='100' class='chart-container'></div>
+
+          <!-- Color Distribution Chart -->
+          <div ng-controller='ColorsChartCtrl as chart' google-chart chart='myChartObject' flex='50' flex-gt-md='100' class='chart-container'></div>
+        </div>
+
+      </div>
     </md-content>
-
   </body>
 </html>

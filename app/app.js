@@ -4,7 +4,9 @@
   app.controller('DeckController', function() {
     this.name = 'UG Merfolk',
     this.format = 'Standard',
-    this.cards = cards
+    this.cards = cards,
+    this.cardTypes = ['Creature', 'Planeswalker', 'Instant', 'Sorcery', 'Enchantment', 'Land'],
+    this.columns = columns
   })
 
   app.controller('ManaCurveChartCtrl', function($scope) {
@@ -22,7 +24,8 @@
 
     $scope.myChartObject.options = {
         'title': 'Mana Curve',
-        'height': 300,
+        'height': '100%',
+        'width': '100%',
         backgroundColor: { fill:'transparent' },
         legend: { position: "none" },
         vAxes: {
@@ -53,7 +56,8 @@
 
     $scope.myChartObject.options = {
       'title': 'Color Distribution',
-      'height': 300,
+      'height': '100%',
+      'width': '100%',
       backgroundColor: { fill:'transparent'},
       colors: ['#EEEEEE', '#90CAF9', '#CE93D8', '#EF9A9A', '#A5D6A7'],
       pieSliceBorderColor: '#BDBDBD',
@@ -61,7 +65,7 @@
     }
   })
 
-  var cards = [
+  var unsortedCards = [
     {
       name: "Herald of Secret Streams",
       main: 1,
@@ -264,18 +268,37 @@
     },
   ]
 
-  var maxCMC = cards.reduce(function(prev, curr) {
+  var cards = {
+    Creature: unsortedCards.filter(function(card) {
+      return card.type === 'Creature'
+    }),
+    Planeswalker: unsortedCards.filter(function(card) {
+      return card.type === 'Planeswalker'
+    }),
+    Instant: unsortedCards.filter(function(card) {
+      return card.type === 'Instant'
+    }),
+    Sorcery: unsortedCards.filter(function(card) {
+      return card.type === 'Sorcery'
+    }),
+    Enchantment: unsortedCards.filter(function(card) {
+      return card.type === 'Enchantment'
+    }),
+    Land: unsortedCards.filter(function(card) {
+      return card.type === 'Land'
+    }),
+  }
+
+  var columns = seperateColumns()
+
+  var maxCMC = unsortedCards.reduce(function(prev, curr) {
     return prev.cmc > curr.cmc ? prev : curr
   }).cmc
-
-  var cmcRange = Array
-                  .apply(null, Array(maxCMC + 1 > 6 ? maxCMC + 1 : 6))
-                  .map(function (_, i) { return i })
 
   function tallyCmcs () {
     var cmcs = []
     for(var i = 0; i < (maxCMC + 1); i++) {
-      var matches = cards.map(function(card) {
+      var matches = unsortedCards.map(function(card) {
         if (card.cmc === i) {
           return card.main
         } else {
@@ -287,7 +310,7 @@
       }, 0)
       cmcs.push(
         {c: [
-          {v: 'CMC ' + i},
+          {v: i},
           {v: amount},
         ]}
       )
@@ -303,10 +326,8 @@
       'R': 0,
       'G': 0
     }
-    cards.forEach(function(card) {
+    unsortedCards.forEach(function(card) {
       card.color.forEach(function(color) {
-        console.log(colors[color])
-        console.log(card.main)
         colors[color] = (colors[color] + card.main)
       })
     })
@@ -333,5 +354,29 @@
       ]},
     ]
     return totalColors
+  }
+
+  function seperateColumns() {
+    var col1 = []
+    var col2 = []
+    var sortedCategories = Object.values(cards).sort(function(a, b) {
+      return b.length - a.length
+    })
+    var col1Count = sortedCategories[0].length
+    col1.push(sortedCategories.shift())
+    var col2Count = sortedCategories[0].length
+    col2.push(sortedCategories.shift())
+    repeatTimes = sortedCategories.length
+
+    for (var i = 0; i < repeatTimes; i++) {
+      if (col1Count <= col2Count) {
+        col1Count += sortedCategories[0].length
+        col1.push(sortedCategories.shift())
+      } else {
+        col2Count += sortedCategories[0].length
+        col2.push(sortedCategories.shift())
+      }
+    }
+    return [col1, col2]
   }
 })()

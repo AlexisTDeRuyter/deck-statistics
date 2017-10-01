@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('MyApp', ['ngMaterial', 'googlechart'])
+  var app = angular.module('MyApp', ['ngMaterial', 'googlechart', 'deck-directives'])
 
   app.controller('DeckController', function() {
     this.name = 'UG Merfolk',

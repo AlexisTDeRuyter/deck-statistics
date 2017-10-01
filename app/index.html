@@ -9,11 +9,12 @@
     <script src='../node_modules/angular-material/angular-material.min.js'></script>
     <script src='../node_modules/angular-google-chart/ng-google-chart.js'></script>
     <script type='text/javascript' src='app.js'></script>
+    <script type='text/javascript' src='decks.js'></script>
   </head>
   <body layout='column'>
 
     <!-- App Header -->
-    <md-toolbar layout='row' layout-align='center center' layout-margin>
+    <md-toolbar layout='row' layout-align='center center'>
       <h1 class='md-display-1'>Deck Statistics</h1>
     </md-toolbar>
 
@@ -21,49 +22,35 @@
     <md-content layout='column' ng-controller='DeckController as deck'>
 
       <!-- Deck Header -->
-      <div layout='row' layout-align='start center' layout-margin>
+      <md-subheader layout='row' layout-align='start center'>
         <h1 class='md-display-1' flex>{{deck.name}}</h1>
-      </div>
+      </md-subheader>
 
-      <!-- Deck List Details -->
-      <div layout='col' layout-gt-md='row' layout-wrap>
-        <div flex='100' flex-gt-md='60' flex-order='1' flex-order-gt-md='-1'>
-          <div layout='row' layout-wrap>
+      <!-- Deck Content Container -->
+      <md-content>
 
-            <!-- Each Column -->
-            <md-list ng-repeat='column in deck.columns' flex='50'>
+        <!-- Mobile Tab Display -->
+        <md-tabs md-dynamic-height md-stretch-tabs='yes' hide-gt-xs md-swipe-content>
+          <md-tab label='Statistics'>
+            <statistics flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='1' layout='col' layout-gt-xs='row' layout-gt-md='col' layout-wrap></statistics>
+          </md-tab>
+          <md-tab label='Deck List'>
+            <decklist flex='100' flex-gt-md='60' flex-order='1' flex-order-gt-md='-1'></decklist>
+          </md-tab>
+        </md-tabs>
 
-              <!-- Each Category in Column -->
-              <div ng-repeat='category in column'>
-                <md-subheader>
-                  <h3 class='md-title'>{{category[0].type}}</h3>
-                </md-subheader>
 
-                <!-- Each Card in Category-->
-                <md-list-item ng-repeat='card in category'>
-                  <img ng-src='{{card.artCrop}}' class='md-avatar'/>
-                  <div layout='row' layout-align='space-between center' flex>
-                    <p class='md-body-2'>{{card.name}}</p>
-                    <p class='md-body-2'>{{card.main}}</p>
-                  </div>
-                </md-list-item>
+        <!-- Regular Non-Tab Display -->
+        <div layout='col' layout-gt-md='row' layout-wrap hide-xs>
 
-              </div>
-            </md-list>
-          </div>
+          <!-- Deck List -->
+          <decklist flex='100' flex-gt-md='60' flex-order='1' flex-order-gt-md='-1'></decklist>
+
+          <!-- Statistics -->
+          <statistics flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='1' layout='col' layout-gt-xs='row' layout-gt-md='col' layout-wrap></statistics>
+
         </div>
-
-        <!-- Deck Statistics -->
-        <div flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='1' layout='row' layout-gt-md='col' layout-wrap>
-
-          <!-- Mana Curve Chart -->
-          <div ng-controller='ManaCurveChartCtrl as chart' google-chart chart="myChartObject" flex='50' flex-gt-md='100' class='chart-container'></div>
-
-          <!-- Color Distribution Chart -->
-          <div ng-controller='ColorsChartCtrl as chart' google-chart chart='myChartObject' flex='50' flex-gt-md='100' class='chart-container'></div>
-        </div>
-
-      </div>
+      </md-content>
     </md-content>
   </body>
 </html>

@@ -13,3 +13,10 @@ app.directive('decklist', function() {
     templateUrl: 'decklist.html'
   }
 })
+
+app.directive('comments', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'comments.html'
+  }
+})

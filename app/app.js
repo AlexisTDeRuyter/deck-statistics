@@ -1,13 +1,40 @@
 (function() {
   var app = angular.module('MyApp', ['ngMaterial', 'googlechart', 'deck-directives'])
 
-  app.controller('DeckController', function() {
+  app.controller('DeckController', function($scope, $mdDialog) {
     this.name = 'UG Merfolk',
     this.format = 'Standard',
     this.cards = cards,
     this.cardTypes = ['Creature', 'Planeswalker', 'Instant', 'Sorcery', 'Enchantment', 'Land'],
     this.columns = columns,
-    this.popoverIsVisible = false
+    this.popoverIsVisible = false,
+    this.comments = [
+      {
+        author: 'mtgfanatic',
+        body: 'Fish!!!'
+      }
+    ],
+    this.newComment = {},
+    this.clearNewComment = function() {
+      this.newComment = {}
+    },
+    this.addComment = function() {
+      this.comments.push(this.newComment)
+      this.clearNewComment()
+    },
+    this.openDialog = function($event) {
+      $mdDialog.show({
+        templateUrl: 'dialog_comment_form.html',
+        openFrom: angular.element(document.getElementById('comment_button')),
+        closeTo: angular.element(document.getElementById('comment_button')),
+        scope: $scope.$new(),
+        controller: function($scope, $mdDialog) {
+          $scope.hideDialog = function($event) {
+            $mdDialog.hide()
+          }
+        }
+      })
+    }
   })
 
   app.controller('ManaCurveChartCtrl', function($scope) {

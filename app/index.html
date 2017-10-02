@@ -2,17 +2,20 @@
 <html ng-app='MyApp'>
   <head>
     <link rel='stylesheet' href='../node_modules/angular-material/angular-material.min.css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel='stylesheet' href='styles.css'>
     <script src='../node_modules/angular/angular.min.js'></script>
     <script src='../node_modules/angular-animate/angular-animate.js'></script>
     <script src='../node_modules/angular-aria/angular-aria.min.js'></script>
     <script src='../node_modules/angular-material/angular-material.min.js'></script>
     <script src='../node_modules/angular-google-chart/ng-google-chart.js'></script>
+    <script src='../node_modules/angular-messages/angular-messages.min.js'></script>
     <script type='text/javascript' src='app.js'></script>
     <script type='text/javascript' src='decks.js'></script>
   </head>
-  <body layout='column'>
+  <body layout='column' id='content'>
 
+    <div class='body-container'>
     <!-- App Header -->
     <md-toolbar layout='row' layout-align='center center'>
       <h1 class='md-display-1'>Deck Statistics</h1>
@@ -22,34 +25,50 @@
     <md-content layout='column' ng-controller='DeckController as deck'>
 
       <!-- Deck Header -->
-      <md-subheader layout='row' layout-align='start center'>
-        <h1 class='md-display-1' flex>{{deck.name}}</h1>
-      </md-subheader>
+      <md-toolbar layout='row' layout-align='start center' class='md-accent'>
+        <h1 class='md-display-1'>{{deck.name}}</h1>
+      </md-toolbar>
+      <md-content class='deck-content-container'>
 
-      <md-content>
+        <!-- Mobile/XS Tab Display -->
+        <md-button id='comment_button' hide-gt-xs class='md-fab md-primary md-fab-bottom-right' aria-label='Leave Comment' ng-class='{ visible: selectedTab === 2 }' ng-click='deck.openDialog()'>
+          <md-icon> comment </md-icon>
+        </md-button>
 
-        <!-- Mobile Tab Display -->
-        <md-tabs md-dynamic-height md-stretch-tabs='always' hide-gt-xs md-border-bottom='true' md-swipe-content='true'>
-          <md-tab label='Statistics'>
-            <statistics flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='1' layout='col' layout-gt-xs='row' layout-gt-md='col' layout-wrap></statistics>
-          </md-tab>
-          <md-tab label='Deck List'>
-            <decklist flex='100' flex-gt-md='60' flex-order='1' flex-order-gt-md='-1'></decklist>
-          </md-tab>
-        </md-tabs>
-
-
-        <!-- Regular Non-Tab Display -->
-        <div layout='col' layout-gt-md='row' layout-wrap hide-xs>
+        <md-tabs md-dynamic-height md-stretch-tabs='always' hide-gt-xs md-border-bottom='true' md-swipe-content='true' md-selected='selectedTab'>
 
           <!-- Deck List -->
-          <decklist flex='100' flex-gt-md='60' flex-order='1' flex-order-gt-md='-1'></decklist>
+          <md-tab label='Deck List'>
+            <decklist flex='100'></decklist>
+          </md-tab>
 
           <!-- Statistics -->
-          <statistics flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='1' layout='col' layout-gt-xs='row' layout-gt-md='col' layout-wrap></statistics>
+          <md-tab label='Statistics'>
+            <statistics flex='100' layout='col' layout-wrap layout-align-xs='space-around center' layout-margin ></statistics>
+          </md-tab>
+
+          <!-- Comments -->
+          <md-tab label='Comments'>
+            <comments flex='100'></comments>
+          </md-tab>
+
+        </md-tabs>
+
+        <!-- Regular Non-Tab Display -->
+        <div layout='col' layout-gt-md='row' layout-wrap hide-xs layout-margin>
+
+          <!-- Deck List -->
+          <decklist flex='100' flex-gt-md='55' flex-order='0' flex-order-gt-md='-1'></decklist>
+
+          <!-- Statistics -->
+          <statistics flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='0' layout='row' layout-wrap layout-margin layout-align-gt-xs='space-around' layout-align-gt-md='start'></statistics>
+
+          <!-- Comments -->
+          <comments flex='100' flex-order='1' layout-wrap layout-margin layout-align='space-around' layout='column' layout-gt-md='row'></comments>
 
         </div>
       </md-content>
     </md-content>
+  </div>
   </body>
 </html>

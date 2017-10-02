@@ -1,0 +1,32 @@
+<div layout='row' layout='col' layout-wrap layout-align-xs='space-around center' layout-margin flex-gt-md='55'layout-align-gt-md='center center'>
+  <md-card flex='100' ng-repeat='comment in deck.comments'>
+    <md-card-content class='md-body-1'>
+      {{comment.body}}
+    </md-card-content>
+    <md-card-footer class='md-body-1' layout='row' layout-align='end center'>
+      -{{comment.author}}
+    </md-card-footer>
+  </md-card>
+</div>
+<div hide-xs flex-gt-md='35'>
+  <md-card flex='100'>
+    <form name='commentForm' role='form' layout-padding ng-submit='commentForm.$valid && deck.addComment()'>
+      <md-card-content>
+        <md-input-container class='md-block'>
+          <label>Comment</label>
+          <textarea rows='3' ng-model=deck.newComment.body required name='body'></textarea>
+        </md-input-container>
+        <md-input-container class='md-block'>
+          <label>Name</label>
+          <input ng-model=deck.newComment.author required name='author'>
+        </md-input-container>
+      </md-card-content>
+      <md-card-footer>
+        <div layout='row' layout-align='space-around center'>
+          <md-button class='md-raised md-warn' ng-click='deck.clearNewComment()'>Cancel</md-button>
+          <md-button class='md-raised md-primary' type='submit'>Submit</md-button>
+        </div>
+      </md-card-footer>
+    </form>
+  </md-card>
+</div>

@@ -1,0 +1,28 @@
+<div layout='row' layout-wrap>
+
+  <!-- Each Column -->
+  <md-list ng-repeat='column in deck.columns' flex='100' flex-gt-xs='50'>
+
+    <!-- Each Category in Column -->
+    <div ng-repeat='category in column'>
+      <md-subheader>
+        <h3 class='md-title'>{{category[0].type}}</h3>
+      </md-subheader>
+
+      <!-- Each Card in Category-->
+      <md-list-item ng-repeat='card in category'>
+        <img ng-src='{{card.artCrop}}' class='md-avatar'/>
+        <div layout='row' layout-align='space-between center' flex>
+          <p class='md-body-2' ng-mouseover='card.popoverIsVisible = true' ng-mouseleave='card.popoverIsVisible = false'>{{card.name}}</p>
+          <p class='md-body-2'>{{card.main}}</p>
+        </div>
+        <div class='popover' ng-show=card.popoverIsVisible>
+          <img ng-src='{{card.normalImg}}' />
+        </div>
+        <md-divider md-inset></md-divider>
+      </md-list-item>
+
+    </div>
+  </md-list>
+
+</div>

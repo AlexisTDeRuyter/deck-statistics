@@ -6,7 +6,8 @@
     this.format = 'Standard',
     this.cards = cards,
     this.cardTypes = ['Creature', 'Planeswalker', 'Instant', 'Sorcery', 'Enchantment', 'Land'],
-    this.columns = columns
+    this.columns = columns,
+    this.popoverIsVisible = false
   })
 
   app.controller('ManaCurveChartCtrl', function($scope) {
@@ -74,7 +75,7 @@
       cmc: 4,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/59.jpg?1503922839',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/59.jpg?1503922839'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/59.jpg?1503922839'
     },
     {
       name: 'Fleet Swallower',
@@ -84,7 +85,7 @@
       cmc: 7,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/57.jpg?1505492781',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/57.jpg?1505492781'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/57.jpg?1505492781'
     },
     {
       name: "Kumena's Speaker",
@@ -94,7 +95,7 @@
       cmc: 1,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/196.jpg?1504535642',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/196.jpg?1504535642'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/196.jpg?1504535642'
     },
     {
       name: "Jungle Delver",
@@ -104,7 +105,7 @@
       cmc: 1,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/195.jpg?1505488709',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/195.jpg?1505488709'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/195.jpg?1505488709'
     },
     {
       name: "Deeproot Warrior",
@@ -114,7 +115,7 @@
       cmc: 2,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/186.jpg?1505488213',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/186.jpg?1505488213'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/186.jpg?1505488213'
     },
     {
       name: "Jace's Sentinel",
@@ -124,7 +125,7 @@
       cmc: 2,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/283.jpg?1504741339',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/283.jpg?1504741339'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/283.jpg?1504741339'
     },
     {
       name: "Shaper Apprentice",
@@ -134,7 +135,7 @@
       cmc: 2,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/75.jpg?1505490505',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/75.jpg?1505490505'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/75.jpg?1505490505'
     },
     {
       name: "Vineshaper Mystic",
@@ -144,7 +145,7 @@
       cmc: 3,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/214.jpg?1505405621',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/214.jpg?1505405621'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/214.jpg?1505405621'
     },
     {
       name: "Shapers of Nature",
@@ -154,7 +155,7 @@
       cmc: 3,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/228.jpg?1504571968',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/228.jpg?1504571968'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/228.jpg?1504571968'
     },
     {
       name: "Jade Guardian",
@@ -164,7 +165,7 @@
       cmc: 4,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/194.jpg?1505488630',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/194.jpg?1505488630'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/194.jpg?1505488630'
     },
     {
       name: "Headwater Sentries",
@@ -174,7 +175,7 @@
       cmc: 4,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/58.jpg?1505068893',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/58.jpg?1505068893'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/58.jpg?1505068893'
     },
     {
       name: "Tempest Caller",
@@ -184,7 +185,7 @@
       cmc: 4,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/86.jpg?1505490935',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/86.jpg?1505490935'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/86.jpg?1505490935'
     },
     {
       name: "Air Elemental",
@@ -194,7 +195,7 @@
       cmc: 5,
       type: 'Creature',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/45.jpg?1505478813',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/45.jpg?1505478813'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/45.jpg?1505478813'
     },
     {
       name: "Grasping Current",
@@ -204,7 +205,7 @@
       cmc: 5,
       type: 'Sorcery',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/282.jpg?1504283199',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/282.jpg?1504283199'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/282.jpg?1504283199'
     },
     {
       name: "River Heralds' Boon",
@@ -214,7 +215,7 @@
       cmc: 2,
       type: 'Instant',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/204.jpg?1505751172',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/204.jpg?1505751172'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/204.jpg?1505751172'
     },
     {
       name: "Castaway's Despair",
@@ -224,7 +225,7 @@
       cmc: 4,
       type: 'Enchantment',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/281.jpg?1504283085',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/281.jpg?1504283085'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/281.jpg?1504283085'
     },
     {
       name: "Woodland Stream",
@@ -234,7 +235,7 @@
       cmc: null,
       type: 'Land',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/284.jpg?1504283346',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/284.jpg?1504283346'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/284.jpg?1504283346'
     },
     {
       name: "Forest",
@@ -244,7 +245,7 @@
       cmc: null,
       type: 'Land',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/279.jpg?1505490312',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/279.jpg?1505490312'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/279.jpg?1505490312'
     },
     {
       name: "Island",
@@ -254,7 +255,7 @@
       cmc: null,
       type: 'Land',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/267.jpg?1505490157',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/267.jpg?1505490157'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/267.jpg?1505490157'
     },
     {
       name: "Jace, Ingenious Mind-Mage",
@@ -264,7 +265,7 @@
       cmc: 6,
       type: 'Planeswalker',
       artCrop: 'https://img.scryfall.com/cards/art_crop/en/xln/280.jpg?1504282950',
-      normalImg: 'https://img.scryfall.com/cards/normal/en/xln/280.jpg?1504282950'
+      normalImg: 'https://img.scryfall.com/cards/small/en/xln/280.jpg?1504282950'
     },
   ]
 

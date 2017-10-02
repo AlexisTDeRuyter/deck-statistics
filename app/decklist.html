@@ -13,12 +13,12 @@
       <md-list-item ng-repeat='card in category'>
         <img ng-src='{{card.artCrop}}' class='md-avatar'/>
         <div layout='row' layout-align='space-between center' flex>
-          <p class='md-body-2'>{{card.name}}</p>
+          <p class='md-body-2' ng-mouseover='card.popoverIsVisible = true' ng-mouseleave='card.popoverIsVisible = false'>{{card.name}}</p>
           <p class='md-body-2'>{{card.main}}</p>
         </div>
-        <md-tooltip>
+        <div class='popover' ng-show=card.popoverIsVisible>
           <img ng-src='{{card.normalImg}}' />
-        </md-tooltip>
+        </div>
         <md-divider md-inset></md-divider>
       </md-list-item>
 

@@ -7,3 +7,9 @@
     height: 200px
   }
 }
+
+.popover {
+  position: absolute;
+  z-index: 100;
+  right: 33px;
+}

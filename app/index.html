@@ -26,11 +26,10 @@
         <h1 class='md-display-1' flex>{{deck.name}}</h1>
       </md-subheader>
 
-      <!-- Deck Content Container -->
       <md-content>
 
         <!-- Mobile Tab Display -->
-        <md-tabs md-dynamic-height md-stretch-tabs='yes' hide-gt-xs md-swipe-content>
+        <md-tabs md-dynamic-height md-stretch-tabs='always' hide-gt-xs md-border-bottom='true' md-swipe-content='true'>
           <md-tab label='Statistics'>
             <statistics flex='100' flex-gt-md='40' flex-order='-1' flex-order-gt-md='1' layout='col' layout-gt-xs='row' layout-gt-md='col' layout-wrap></statistics>
           </md-tab>

@@ -1,0 +1,18 @@
+<md-dialog>
+  <md-dialog-content>
+    <form name='commentForm' role='form' layout-padding ng-submit='commentForm.$valid && deck.addComment(); hideDialog()'>
+      <md-input-container class='md-block'>
+        <label>Comment</label>
+        <textarea rows='3' ng-model=deck.newComment.body required></textarea>
+      </md-input-container>
+      <md-input-container class='md-block'>
+        <label>Name</label>
+        <input ng-model=deck.newComment.author required>
+      </md-input-container>
+      <div layout='row' layout-align='end center'>
+        <md-button class='md-raised md-warn' ng-click='deck.clearNewComment(); hideDialog()'>Cancel</md-button>
+        <md-button class='md-raised md-primary' type='submit'>Submit</md-button>
+      </div>
+    </form>
+  </md-dialog-content>
+</md-dialog>
